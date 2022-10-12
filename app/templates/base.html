@@ -1,0 +1,39 @@
+<!doctype html>
+<html class="font-sans m-0 p-0">
+  <head>
+    <title>{% block title %}{% endblock %} ESMEC- Myapp</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="shotcut icon" href="../static/favicon.png">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+  </head>
+  <body class="min-h-screen min-w-full bg-indigo-900 grid place-content-center font-sans"  >
+    <div class="container md:w-[800px] bg-white rounded-lg" >
+      <nav class="rounded-t-md py-4 px-6 flex justify-between flex-col md:flex-row bg-slate-200" >
+        <a class="m-0 p-0">
+          <img src="../static/logo.png"/>
+        </a>
+        <ul class="m-0 p-0 flex-col md:flex-row text-center">
+          {% if g.user %} 
+            <li><span>{{ g.user['username'] }}</span>
+            <li><a href="{{ url_for('auth.logout') }}" class="hover:text-indigo-700 transition-colors">Cerrar Sesión</a>
+          {% else %}
+            <li><a href="{{ url_for('auth.register') }}" class="hover:text-indigo-700 transition-colors">Registrarse</a>
+            <li><a href="{{ url_for('auth.login') }}" class="hover:text-indigo-700 transition-colors">Iniciar Sesión</a>
+            <li><a href="{{ url_for('auth.forgot') }}" class="hover:text-indigo-700 transition-colors">Olvidaste tu contraseña?</a>
+          {% endif %}
+        </ul>
+      </nav>
+      <section class="content p-0 m-0">
+        <header class="mb-2 flex justify-between">
+          {% block header %}
+          {% endblock %}
+        </header>
+        {% for message in get_flashed_messages() %}
+          <div class="flash rounded-md bg-indigo-300 border-indigo-600 text-indigo-800">{{ message }}</div>
+        {% endfor %}
+        {% block content %}{% endblock %}
+      </section>
+    </div>
+
+  </body>
+</html>

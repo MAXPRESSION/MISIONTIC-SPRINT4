@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h2 class="text-indigo-900 bg-yellow-300 w-full p-3 uppercase font-bold pl-10">{% block title %}Olvide mi contraseña!{% endblock %}</h2>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+  {% endblock %}
+
+{% block content %}
+  <form method="post" action="{{ url_for('auth.forgot')}}" class="px-6 py-4">
+    
+    <label for="email">Ingrese su correo electrónico</label>
+    <div class="relative my-2 rounded shadow-sm"> 
+      <input placeholder="Correo Electrónico" type="email" name="email" id="email" class=" border border-gray-300 rounded-md py-2 pr-3 pl-10 w-full mb-2 focus:border-indigo-500 text-indigo-900 text-center uppercase" required>
+       
+     <div class="absolute inset-y-2">
+      <i class="bi-envelope text-gray-400 my-auto mx-4"></i>
+     </div>
+  
+   </div>
+
+    <input type="submit" value="Restablecer Contraseña" class="w-max bg-yellow-300 rounded-md py-2 px-4 m-2  cursor-pointer hover:bg-yellow-400 transition-all text-indigo-900 font-bold uppercase mx-auto cursor-pointer">
+
+  </form>
+{% endblock %}
